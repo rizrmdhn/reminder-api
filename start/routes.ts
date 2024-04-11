@@ -17,8 +17,6 @@ router.post('/register', [AuthController, 'register'])
 
 router
   .group(() => {
-    router.post('/logout', [AuthController, 'logout'])
-
     // Todo routes
     router.get('/todos', [TodosController, 'index'])
   })

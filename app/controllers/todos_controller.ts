@@ -6,7 +6,7 @@ export default class TodosController {
    * Display a list of resource
    */
   async index({ auth, response }: HttpContext) {
-    const user = auth.user!
+    const user = await auth.use('jwt').authenticate()
 
     const todos = await Todo.query().where('created_by', user.user_id)
 

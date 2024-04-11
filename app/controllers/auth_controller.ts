@@ -46,15 +46,4 @@ export default class AuthController {
       },
     })
   }
-
-  async logout({ auth, response }: HttpContext) {
-    await User.accessTokens.delete(auth.user!, auth.user!.currentAccessToken.identifier)
-
-    return response.ok({
-      meta: {
-        status: 200,
-        message: 'Success',
-      },
-    })
-  }
 }

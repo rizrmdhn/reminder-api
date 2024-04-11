@@ -7,8 +7,9 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.string('reminder_id').primary().notNullable()
       table.string('id_todo').references('todo_id').inTable('todos').onDelete('CASCADE')
+      table.string('title').notNullable()
       table.string('description').nullable()
-      table.timestamp('time_reminder').notNullable()
+      table.string('time_reminder').notNullable()
       table.string('created_by').references('user_id').inTable('users').onDelete('CASCADE')
 
       table.timestamp('created_at')

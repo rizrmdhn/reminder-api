@@ -39,7 +39,7 @@ export default class TodosController {
     return response.created({
       meta: {
         status: 201,
-        message: 'Todo created',
+        message: 'Success',
       },
       data: todo,
     })
@@ -104,7 +104,7 @@ export default class TodosController {
     return response.ok({
       meta: {
         status: 200,
-        message: 'Todo updated',
+        message: 'Success',
       },
       data: todo,
     })
@@ -135,7 +135,7 @@ export default class TodosController {
     return response.ok({
       meta: {
         status: 200,
-        message: 'Todo deleted',
+        message: 'Success',
       },
     })
   }

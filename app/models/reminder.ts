@@ -12,10 +12,13 @@ export default class Reminder extends BaseModel {
   declare id_todo: string
 
   @column()
+  declare title: string
+
+  @column()
   declare description: string | null
 
-  @column.dateTime()
-  declare time_reminder: DateTime
+  @column()
+  declare time_reminder: string
 
   @column()
   declare created_by: string

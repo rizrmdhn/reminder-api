@@ -34,7 +34,7 @@ export default class AuthController {
     return response.created({
       meta: {
         status: 201,
-        message: 'User created',
+        message: 'Success',
       },
       data: {
         user_id: user.user_id,

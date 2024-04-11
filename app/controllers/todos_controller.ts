@@ -1,10 +1,23 @@
+import Todo from '#models/todo'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class TodosController {
   /**
    * Display a list of resource
    */
-  async index({}: HttpContext) {}
+  async index({ auth, response }: HttpContext) {
+    const user = auth.user!
+
+    const todos = await Todo.query().where('created_by', user.user_id)
+
+    return response.ok({
+      meta: {
+        status: 200,
+        message: 'Success',
+      },
+      data: todos,
+    })
+  }
 
   /**
    * Display form to create a new record

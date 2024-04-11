@@ -4,12 +4,12 @@ import User from '#models/user'
 import * as nanoid from 'nanoid'
 
 export default class AuthController {
-  async login({ request, response }: HttpContext) {
+  async login({ auth, request, response }: HttpContext) {
     const { email, password } = await request.validateUsing(loginValidator)
 
     const user = await User.verifyCredentials(email, password)
 
-    const token = await User.accessTokens.create(user)
+    const token = await auth.use('jwt').generate(user)
 
     return response.ok({
       meta: {

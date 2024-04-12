@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const UsersController = () => import('#controllers/users_controller')
 const RemindersController = () => import('#controllers/reminders_controller')
 const AuthController = () => import('#controllers/auth_controller')
 const TodosController = () => import('#controllers/todos_controller')
@@ -31,5 +32,8 @@ router
     router.get('/reminders/:reminder_id', [RemindersController, 'show'])
     router.put('/reminders/:reminder_id', [RemindersController, 'edit'])
     router.delete('/reminders/:reminder_id', [RemindersController, 'destroy'])
+
+    // User routes
+    router.get('/users/me', [UsersController, 'index'])
   })
   .middleware(middleware.auth())

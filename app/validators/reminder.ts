@@ -5,7 +5,7 @@ export const createReminderValidator = vine.compile(
     idTodo: vine.string().maxLength(255),
     title: vine.string().maxLength(255),
     description: vine.string().maxLength(2555),
-    timeReminder: vine.string(),
+    timeReminder: vine.string().minLength(3),
   })
 )
 
@@ -13,6 +13,6 @@ export const updateReminderValidator = vine.compile(
   vine.object({
     title: vine.string().maxLength(255),
     description: vine.string().maxLength(2555),
-    timeReminder: vine.string(),
+    timeReminder: vine.string().optional(),
   })
 )

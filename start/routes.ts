@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const RemindersController = () => import('#controllers/reminders_controller')
 const AuthController = () => import('#controllers/auth_controller')
 const TodosController = () => import('#controllers/todos_controller')
 
@@ -19,5 +20,16 @@ router
   .group(() => {
     // Todo routes
     router.get('/todos', [TodosController, 'index'])
+    router.post('/todos', [TodosController, 'store'])
+    router.get('/todos/:todo_id', [TodosController, 'show'])
+    router.put('/todos/:todo_id', [TodosController, 'edit'])
+    router.delete('/todos/:todo_id', [TodosController, 'destroy'])
+
+    // Reminder routes
+    router.get('/reminders', [RemindersController, 'index'])
+    router.post('/reminders', [RemindersController, 'store'])
+    router.get('/reminders/:reminder_id', [RemindersController, 'show'])
+    router.put('/reminders/:reminder_id', [RemindersController, 'edit'])
+    router.delete('/reminders/:reminder_id', [RemindersController, 'destroy'])
   })
   .middleware(middleware.auth())

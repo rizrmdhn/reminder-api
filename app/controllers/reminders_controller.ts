@@ -102,7 +102,7 @@ export default class RemindersController {
 
     reminder.title = title
     reminder.description = description
-    reminder.time_reminder = timeReminder
+    reminder.time_reminder = timeReminder ?? reminder.time_reminder
 
     await reminder.save()
 

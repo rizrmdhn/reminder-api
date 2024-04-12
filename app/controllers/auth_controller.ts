@@ -37,9 +37,9 @@ export default class AuthController {
         message: 'Success',
       },
       data: {
-        user_id: user.user_id,
-        fullname: user.fullname,
+        userId: user.user_id,
         username: user.username,
+        fullname: user.fullname,
         email: user.email,
         created_at: user.createdAt,
         updated_at: user.updatedAt,

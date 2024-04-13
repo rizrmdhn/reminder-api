@@ -42,16 +42,16 @@ export default class UsersController {
       // check if the user already has an avatar
       if (user.avatar) {
         // delete the existing avatar
-        fs.unlinkSync(app.makePath('uploads', user.avatar))
+        fs.unlinkSync(app.makePath('uploads/avatar', user.avatar))
       }
 
       const avatarName = `${nanoid.nanoid(16)}-${user.username}.${avatar.extname}`
-      await avatar.move(app.makePath('uploads'), {
+      await avatar.move(app.makePath('uploads/avatar'), {
         name: avatarName,
       })
 
       user.avatar = avatarName
-      user.avatar_url = env.get('APP_URL') + '/uploads/' + avatarName
+      user.avatar_url = env.get('APP_URL') + '/uploads/avatar/' + avatarName
     }
 
     if (fullname) {

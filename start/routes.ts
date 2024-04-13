@@ -20,21 +20,21 @@ const PATH_TRAVERSAL_REGEX = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 router.post('/login', [AuthController, 'login'])
 router.post('/register', [AuthController, 'register'])
 
+// Upload routes
+router.get('/uploads/avatar/*', async ({ request, response }) => {
+  const filePath = request.param('*').join(sep)
+  const normalizedPath = normalize(filePath)
+
+  if (PATH_TRAVERSAL_REGEX.test(normalizedPath)) {
+    return response.badRequest('Malformed path')
+  }
+
+  const absolutePath = app.makePath('uploads/avatar', normalizedPath)
+  return response.download(absolutePath)
+})
+
 router
   .group(() => {
-    // Upload routes
-    router.get('/uploads/*', async ({ request, response }) => {
-      const filePath = request.param('*').join(sep)
-      const normalizedPath = normalize(filePath)
-
-      if (PATH_TRAVERSAL_REGEX.test(normalizedPath)) {
-        return response.badRequest('Malformed path')
-      }
-
-      const absolutePath = app.makePath('uploads', normalizedPath)
-      return response.download(absolutePath)
-    })
-
     // Todo routes
     router.get('/todos', [TodosController, 'index'])
     router.post('/todos', [TodosController, 'store'])

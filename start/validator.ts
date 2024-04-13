@@ -14,6 +14,9 @@ vine.messagesProvider = new SimpleMessagesProvider({
   'password.required': 'Password is required',
   'password.minLength': 'Password must be at least 8 characters',
   'password.maxLength': 'Password must not exceed 255 characters',
+  'idTodo.required': 'Todo is required',
+  'idTodo.maxLength': 'Todo must not exceed 255 characters',
+  'idTodo.exists': 'Todo does not exist',
   'title.required': 'Title is required',
   'title.minLength': 'Title must be at least 3 characters',
   'title.maxLength': 'Title must not exceed 255 characters',
@@ -21,4 +24,7 @@ vine.messagesProvider = new SimpleMessagesProvider({
   'timeReminder.required': 'Time reminder is required',
   'timeReminder.minLength': 'Time reminder must be at least 3 characters',
   'timeReminder.maxLength': 'Time reminder must not exceed 255 characters',
+
+  'database.unique': 'The {{field}} already exists in the database',
+  'database.exists': 'The {{field}} does not exist in the database',
 })

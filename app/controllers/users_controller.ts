@@ -22,6 +22,8 @@ export default class UsersController {
         username: user.username,
         fullname: user.fullname,
         email: user.email,
+        avatar: user.avatar,
+        avatar_url: user.avatar_url,
         created_at: user.createdAt,
         updated_at: user.updatedAt,
       },

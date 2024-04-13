@@ -2,6 +2,8 @@ import type { HttpContext } from '@adonisjs/core/http'
 import { loginValidator, registerValidator } from '#validators/auth'
 import User from '#models/user'
 import * as nanoid from 'nanoid'
+import app from '@adonisjs/core/services/app'
+import env from '#start/env'
 
 export default class AuthController {
   async login({ auth, request, response }: HttpContext) {
@@ -21,7 +23,15 @@ export default class AuthController {
   }
 
   async register({ request, response }: HttpContext) {
-    const { email, fullname, password, username } = await request.validateUsing(registerValidator)
+    const { email, fullname, password, username, avatar } =
+      await request.validateUsing(registerValidator)
+
+    if (avatar) {
+      const avatarName = `${nanoid.nanoid(16)}-${username}.${avatar.extname}`
+      await avatar.move(app.makePath('uploads'), {
+        name: avatarName,
+      })
+    }
 
     const user = await User.create({
       user_id: `user_${nanoid.nanoid(16)}`,
@@ -29,6 +39,8 @@ export default class AuthController {
       fullname: fullname,
       password,
       username,
+      avatar: avatar ? avatar.fileName : null,
+      avatar_url: avatar ? env.get('APP_URL') + '/uploads/' + avatar.fileName : null,
     })
 
     return response.created({
@@ -41,6 +53,8 @@ export default class AuthController {
         username: user.username,
         fullname: user.fullname,
         email: user.email,
+        avatar: user.avatar,
+        avatar_url: user.avatar_url,
         created_at: user.createdAt,
         updated_at: user.updatedAt,
       },

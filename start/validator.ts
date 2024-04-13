@@ -24,6 +24,9 @@ vine.messagesProvider = new SimpleMessagesProvider({
   'timeReminder.required': 'Time reminder is required',
   'timeReminder.minLength': 'Time reminder must be at least 3 characters',
   'timeReminder.maxLength': 'Time reminder must not exceed 255 characters',
+  'avatar.file': 'Avatar must be a file',
+  'avatar.size': 'Avatar must not exceed 2mb',
+  'avatar.extnames': 'Avatar must be in jpg, jpeg, or png format',
 
   'database.unique': 'The {{field}} already exists in the database',
   'database.exists': 'The {{field}} does not exist in the database',
